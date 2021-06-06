@@ -1,0 +1,206 @@
+\documentclass[16pt,xcolor=dvipsnames]{beamer}
+\usepackage{fontspec}
+\usepackage{caption}
+\usepackage{ctex}
+\usepackage{graphicx}
+
+
+\usetheme{Madrid}
+\usecolortheme{beaver}
+\setsansfont{Times New Roman}
+
+\setbeamertemplate{navigation symbols}{}%删除导航栏
+
+\usepackage[backend=bibtex,sorting=none]{biblatex}
+\addbibresource{nju_beamer.bib} %BibTeX数据文件及位置
+\setbeamerfont{footnote}{size=\tiny}
+\setbeamertemplate{bibliography item}[text]
+
+\title[脚注处的标题]{your title}
+\subtitle{your subtitle}
+
+\author[脚注处的名字]{
+    your name
+}
+
+\institute[脚注处的机构]{
+    %\includegraphics[width=0.2cm]{njulogo}
+    Nanjing University\\
+    Kuang Yaming honors school
+}
+
+\date[脚注处的日期]{June 2021}
+%\date{\today}%今天的日期(中文)
+%\CTEXoptions[today=old](英文日期)
+
+\AtBeginSection[]{%每个section前生成目录
+    \begin{frame}
+        \frametitle{Table of Contents}
+        \tableofcontents[currentsection]
+    \end{frame}
+}
+
+
+\hypersetup{pdfpagemode=FullScreen}
+%\logo{\includegraphics[height=1.3cm]{njulogo}}%右下角的logo
+
+\usepackage{tikz}
+% We need lots of libraries...
+\usetikzlibrary{
+  arrows,
+  calc,
+  %fit,
+  %patterns,
+  %plotmarks,
+  shapes.geometric,%
+  shapes.misc,
+  shapes.symbols,
+  %shapes.arrows,
+  %shapes.callouts,
+  %shapes.multipart,
+  %shapes.gates.logic.US,
+  %shapes.gates.logic.IEC,
+  %circuits.logic.US,
+  %circuits.logic.IEC,
+  %circuits.logic.CDH,
+  %circuits.ee.IEC,
+  %datavisualization,
+  %datavisualization.formats.functions,
+  %er,
+  %automata,
+  %backgrounds,
+  %chains,
+  %topaths,
+  %trees,
+  %petri,
+  mindmap,
+  %matrix,
+  %calendar,
+  %folding,
+  %fadings,
+  %shadings,
+  %spy,
+  %through,
+  %turtle,
+  positioning,%
+  %scopes,
+  %decorations.fractals,
+  %decorations.shapes,
+  %decorations.text,
+  decorations.pathmorphing,
+  decorations.pathreplacing,
+  %decorations.footprints,
+  %decorations.markings,
+  %shadows,
+  %lindenmayersystems,
+  %intersections,
+  %fixedpointarithmetic,
+  %fpu,
+  %svg.path,
+  %external,
+}%
+
+\tikzset{
+  textcircledstyle/.style={shape=circle,draw,inner sep=0.5pt}
+}
+\newcommand*\tikzcircled[1]{\tikz[baseline=(char.base)]{\node[textcircledstyle, line width=0.8pt] (char) {#1};}}
+\makeatletter
+
+% Golden bar
+%\pgfdeclarehorizontalshading{goldenbar}{0.05cm}%
+%{rgb(0cm)=(0.56,0.48,0.06); rgb(\paperwidth)=(0.91,0.79,0.22)}
+
+\pgfdeclareimage[height=0.85cm]{njulogo}{njulogo}
+\pgfdeclareimage[height=0.85cm]{njudiilogo}{njudiilogo}
+
+
+% Copied from beamethemeouterdefault.sty
+% - add a shaded golden below frame title
+% - add two logo at the beginning
+\defbeamertemplate*{frametitle}{}[1][left]
+{
+  \ifbeamercolorempty[bg]{frametitle}{}{\nointerlineskip}%
+  \@tempdima=\textwidth%
+  \advance\@tempdima by\beamer@leftmargin%
+  \advance\@tempdima by\beamer@rightmargin%
+  \begin{beamercolorbox}[sep=0.3cm,#1,wd=\the\@tempdima]{frametitle}
+  \usebeamerfont{frametitle}%
+  % paperwidth=12.8cm, left sep=0.3cm
+  \tikz[baseline, overlay] \node [anchor=north east, inner sep=0.1cm, outer sep=0pt] at (12.5cm, 0.3cm) {\pgfuseimage{njulogo}\pgfuseimage{njudiilogo}};% by Tiger
+  \vbox{}\vskip-1ex%
+  \if@tempswa\else\csname beamer@fte#1\endcsname\fi%
+  \strut\insertframetitle\strut\par%
+  {%
+    \ifx\insertframesubtitle\@empty%
+    \else%
+    {\usebeamerfont{framesubtitle}\usebeamercolor[fg]{framesubtitle}\insertframesubtitle\strut\par}%
+    \vskip-2pt% less skip when there is subtitle, by Tiger
+    \fi
+  }%
+  \vskip-1ex%
+  \if@tempswa\else\vskip-.3cm\fi% set inside beamercolorbox... evil here...
+  %\pgfuseshading{goldenbar}% by Tiger
+  %\vskip-.3cm% by Tiger
+  \end{beamercolorbox}%
+}
+
+
+
+
+%下面是正文部分
+\begin{document}
+
+
+\begin{frame}%标题页
+    \maketitle
+\end{frame}
+
+
+\begin{frame}%目录页
+    \frametitle{Table of Contents}
+    \tableofcontents
+\end{frame}
+
+\section{part1}
+\begin{frame}{a}
+    1\footfullcite{vaswani2017attention}%脚注引用参考文献
+\end{frame}
+
+\section{part2}
+\begin{frame}{b}
+    2
+\end{frame}
+
+\section{part3}
+\begin{frame}{c}
+    3
+\end{frame}
+
+\begin{frame}
+    \begin{block}{block1}
+    这是第一种block
+    \end{block}
+    \begin{exampleblock}{block2}
+    这是第二种block
+    \end{exampleblock}
+    \begin{alertblock}{block3}
+    这是第三种block
+    \end{alertblock}
+\end{frame}
+
+
+
+\begin{frame}{References}%参考文献
+    \nocite{*}
+	\printbibliography
+\end{frame}
+
+
+\begin{frame}%thanks
+	\Huge
+    \begin{center}
+        Thanks!
+    \end{center}
+\end{frame}
+
+\end{document}
